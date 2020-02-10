@@ -1,6 +1,9 @@
 function Get-PSGPOPolicy {
     [cmdletbinding()]
-    Param()
+    Param(
+        [cultureinfo]$Culture,
+        [System.IO.DirectoryInfo]$Path
+    )
 
     ### VAR ###
     ### MAIN ###
@@ -8,6 +11,7 @@ function Get-PSGPOPolicy {
     If ($null -eq $Policies){
         Write-Warning "Initiate ADMX and ADML files with Initialize-PSGPOAdmx cmdlet."
     }Else{
+        $Policies = [GpotoolsUtility]::InitiateAdmxAdml($Path,$Culture)
         return $Policies
     }
 }
